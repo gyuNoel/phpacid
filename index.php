@@ -27,6 +27,8 @@ if (isset($_POST['submit'])) {
         $sql = "INSERT INTO students(student_number, first_name, middle_name, last_name, gender, birthday) 
                 VALUES('$s_num', '$s_fn', '$s_mn', '$s_ln', '$s_gender', '$s_bday')";
         $result = mysqli_query($conn, $sql);
+
+
         
         $student_id = $conn->insert_id;
 
@@ -96,48 +98,118 @@ if (isset($_POST['update_id'])) {
 $conn->close();
 
 ?>
-<form action="" method="post">
-    <label>Student Number:</label> <input type="text" name="s_number"><br><br>
-    <label>First Name:</label><input type="text" name="s_fn"><br><br>
-    <label>Middle Name:</label><input type="text" name="s_mn"><br><br>                
-    <label>Last Name:</label><input type="text" name="s_ln"><br><br>       
-    <label>Gender:</label><input type="text" name="s_gender"><br><br>          
-    <label>Birthday:</label><input type="text" name="s_birthday"><br><br>      
-    <label>Contact Number:</label><input type="text" name="s_contact"><br><br>    
-    <label>Street Name:</label><input type="text" name="s_street"><br><br>   
-    <label>Province:</label>
-    <select name="province_name" required>
-        <option value="">-Select Province-</option>
-        <?php
-        while ($row = $province_result->fetch_assoc()) {
-            echo "<option value='{$row['name']}'>{$row['name']}</option>";
-        }
-        ?>
-    </select>
-    <br><br> 
-    <label>Town/City:</label>
-    <select name="town_city_name" required>
-        <option value="">-Select Town/City-</option>
-        <?php
-        while ($row = $town_result->fetch_assoc()) {
-            echo "<option value='{$row['name']}'>{$row['name']}</option>";
-        }
-        ?>
-    </select>
-    <br><br> 
-    <label>Zip Code:</label><input type="text" name="s_zipcode"><br><br>                                  
-    <button type="submit" name="submit"> Submit </button>
-</form>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Student</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        min-height: 100vh;
+    }
+    .container {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 400px;
+        margin: 15px;
+    }
+    h1 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+    label {
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    input, select, button {
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+    button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    .form-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 20px; 
+        margin-top: 20px;
+        flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <div class="container">
+      <h1>Add Student Record</h1>
+      <form action="" method="post">
+        <label>Student Number:</label> <input type="text" name="s_number"><br><br>
+        <label>First Name:</label><input type="text" name="s_fn"><br><br>
+        <label>Middle Name:</label><input type="text" name="s_mn"><br><br>                
+        <label>Last Name:</label><input type="text" name="s_ln"><br><br>       
+        <label>Gender:</label><input type="text" name="s_gender"><br><br>          
+        <label>Birthday:</label><input type="text" name="s_birthday"><br><br>      
+        <label>Contact Number:</label><input type="text" name="s_contact"><br><br>    
+        <label>Street Name:</label><input type="text" name="s_street"><br><br>   
+        <label>Province:</label>
+        <select name="province_name" required>
+            <option value="">-Select Province-</option>
+            <?php
+            while ($row = $province_result->fetch_assoc()) {
+                echo "<option value='{$row['name']}'>{$row['name']}</option>";
+            }
+            ?>
+        </select>
+        <br><br> 
+        <label>Town/City:</label>
+        <select name="town_city_name" required>
+            <option value="">-Select Town/City-</option>
+            <?php
+            while ($row = $town_result->fetch_assoc()) {
+                echo "<option value='{$row['name']}'>{$row['name']}</option>";
+            }
+            ?>
+        </select>
+        <br><br> 
+        <label>Zip Code:</label><input type="text" name="s_zipcode"><br><br>                                  
+        <button type="submit" name="submit"> Submit </button>
+      </form>
+    </div>
 
-
-<h2>Update Student ID</h2>
-    <form action="" method="post">
-        <label>Current Student ID:</label><input type="text" name="current_id" required><br><br>
-        <label>New Student ID:</label><input type="text" name="new_id" required><br><br>
-        <button type="submit" name="update_id">Update ID</button>
-    </form>
-
-
-
-</form>
+    <div class="container">
+      <h1>Update Student ID</h1>
+      <form action="" method="post">
+          <label>Current Student ID:</label><input type="text" name="current_id" required><br><br>
+          <label>New Student ID:</label><input type="text" name="new_id" required><br><br>
+          <button type="submit" name="update_id">Update ID</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
